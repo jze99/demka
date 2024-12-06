@@ -1,0 +1,124 @@
+Customer:
+  - id: 1
+    name: "Тепло-Сервис"
+    contact_info: "8-800-123-45-67"
+    address: "г. Москва, ул. Красная, д. 1"
+  - id: 2
+    name: "ТеплоДом"
+    contact_info: "8-800-234-56-78"
+    address: "г. Санкт-Петербург, ул. Ленина, д. 2"
+  - id: 3
+    name: "Комфорт-Тепло"
+    contact_info: "8-800-345-67-89"
+    address: "г. Екатеринбург, ул. Свердлова, д. 3"
+  - id: 4
+    name: "ТеплоСфера"
+    contact_info: "8-800-456-78-90"
+    address: "г. Новосибирск, ул. Первомайская, д. 4"
+  - id: 5
+    name: "ТеплоСервис-24"
+    contact_info: "8-800-567-89-01"
+    address: "г. Казань, ул. Баумана, д. 5"
+
+Orders:
+  - id: 1
+    order_data: "2023-10-01"
+    customer: "Тепло-Сервис"
+    total_amount: 15000
+  - id: 2
+    order_data: "2023-10-02"
+    customer: "ТеплоДом"
+    total_amount: 20000
+  - id: 3
+    order_data: "2023-10-03"
+    customer: "Комфорт-Тепло"
+    total_amount: 18000
+  - id: 4
+    order_data: "2023-10-04"
+    customer: "ТеплоСфера"
+    total_amount: 12000
+  - id: 5
+    order_data: "2023-10-05"
+    customer: "ТеплоСервис-24"
+    total_amount: 19000
+
+OrderDetalis:
+  - id: 1
+    order_id: 1
+    product: "Радиатор 1"
+    quantity: 5
+    price: 3000
+  - id: 2
+    order_id: 1
+    product: "Радиатор 2"
+    quantity: 3
+    price: 4000
+  - id: 3
+    order_id: 2
+    product: "Радиатор 3"
+    quantity: 4
+    price: 5000
+  - id: 4
+    order_id: 3
+    product: "Радиатор 1"
+    quantity: 6
+    price: 3000
+  - id: 5
+    order_id: 4
+    product: "Радиатор 2"
+    quantity: 2
+    price: 4000
+
+Products:
+  - id: 1
+    name: "Радиатор 1"
+    type: "Алюминиевый"
+    material: "Алюминий"
+    price: 3000
+    stock_quantity: 50
+  - id: 2
+    name: "Радиатор 2"
+    type: "Стальной"
+    material: "Сталь"
+    price: 4000
+    stock_quantity: 30
+  - id: 3
+    name: "Радиатор 3"
+    type: "Биметаллический"
+    material: "Биметалл"
+    price: 5000
+    stock_quantity: 20
+  - id: 4
+    name: "Радиатор 4"
+    type: "Чугунный"
+    material: "Чугун"
+    price: 2500
+    stock_quantity: 40
+  - id: 5
+    name: "Радиатор 5"
+    type: "Пластиковый"
+    material: "Пластик"
+    price: 2000
+    stock_quantity: 60
+
+Suppliers:
+  - id: 1
+    name: "Металл-Трейд"
+    contact_info: "8-800-456-78-90"
+    product_id: 1
+  - id: 2
+    name: "Сталь-Про"
+    contact_info: "8-800-567-89-01"
+    product_id: 2
+  - id: 3
+    name: "Биметалл-Сервис"
+    contact_info: "8-800-678-90-12"
+    product_id: 3
+  - id: 4
+    name: "Чугун-Трейд"
+    contact_info: "8-800-789-01-23"
+    product_id: 4
+  - id: 5
+    name: "Пластик-Про"
+    contact_info: "8-800-890-12-34"
+    product_id: 5

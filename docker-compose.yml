@@ -1,0 +1,48 @@
+services:
+  service:
+    image: demka:app
+    container_name: app
+    #restart: always
+    networks:
+      - demka
+    ports:
+      - "80:80"
+    depends_on:
+      - api
+    build:
+      context: .
+      dockerfile: C:\Users\Administrator\Desktop\demka\app\dockerfile
+
+  api:
+    image: demka:api
+    container_name: api
+    #restart: always
+    ports:
+      - "8000:8000"
+    networks:
+      - demka
+    depends_on:
+      - postgres
+    build:
+      context: .
+      dockerfile: C:\Users\Administrator\Desktop\demka\api\dockerfile
+  
+
+
+  postgres:
+    image: postgres:latest
+    container_name: postgres
+    #restart: always
+    ports:
+      - "5432:5432"
+    networks:
+      - demka
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - PGDATA = /var/lib/postgresql/data/pgdata
+    volumes:
+      - C:\Users\Administrator\Documents\demka-data-base:/var/lib/postgresql/data
+
+networks:
+  demka:
+    driver: bridge
