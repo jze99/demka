@@ -1,19 +1,15 @@
 import flet as ft
 import designer as des
-import requests
 import user_data
 
-class Main_page(ft.View):
-    def __init__(self, page):
-        self.page=page
-        page.update()
+class Orders(ft.View):
+    def __init__(self,route:str,page:ft.Page):
+        self.page = page
         super().__init__(
-            route="/",
-            bgcolor=des.colors[3],
-            scroll=ft.ScrollMode.AUTO,
+            route=route,
+            scroll=True,
             controls=[
                 ft.Column(
-                    horizontal_alignment=ft.CrossAxisAlignment.CENTER,
                     controls=[
                         ft.Row( # Шапка
                             alignment=ft.MainAxisAlignment.CENTER,
@@ -27,9 +23,9 @@ class Main_page(ft.View):
                                 ft.Container(
                                     expand=True,
                                     alignment=ft.alignment.center,
-                                    content=des.Text(value="Клиенты")
+                                    content=des.Text(value="Продажи")
                                 ),
-                                des.Button(text="Продажи", on_clic=self.go_to_orders),
+                                des.Button(text="Клиенты",on_clic=self.go_to_custumers),
                                 ft.Container(
                                     image=ft.DecorationImage(src="logo.png"),
                                     expand=True,
@@ -40,7 +36,6 @@ class Main_page(ft.View):
                         ),
                         ft.Row(
                             expand=True,
-                            alignment=ft.MainAxisAlignment.CENTER,
                             controls=[
                                 ft.Column(
                                     expand=True,
@@ -52,7 +47,7 @@ class Main_page(ft.View):
                                 ft.Column(
                                     alignment=ft.MainAxisAlignment.START,
                                     horizontal_alignment=ft.CrossAxisAlignment.END,
-                                    controls=user_data.button_chec1
+                                    controls=user_data.button_chec2
                                 )
                             ]
                         )
@@ -60,16 +55,18 @@ class Main_page(ft.View):
                 )
             ]
         )
-    def go_to_orders(self,e):
-        self.page.go('/orders_table')
-    
+        
+    def go_to_custumers(self,e):
+        self.page.go('/')
+        
     def load_table(self):
-        user_data.select_row1.clear()
+        import requests
+        user_data.select_row2.clear()
         self.page.update()
-        for b in user_data.button_chec1:
+        for b in user_data.button_chec2:
             b.test()
         user_data.page_user = self.page
-        url="http://api:8000/api-demka/select"
+        url="http://api:8000/api-demka/select1"
         try:
             response = requests.post(url) 
             response.raise_for_status() 
@@ -77,12 +74,12 @@ class Main_page(ft.View):
             temp_data=[]
             for d in data:
                 print(f"{d=}")
-                temp_data.append(des.CardProduct(
+                temp_data.append(des.Row_Orders(
                     page=self.page,
                     id=d['id'],
-                    name_customer=d['name'],
-                    contact_info=d['contact_info'],
-                    address=d['address']
+                    order_data=d['order_data'],
+                    customer=d['customer'],
+                    total_amount=d['total_amount']
                 ))
             return temp_data
         except requests.exceptions.RequestException as e:

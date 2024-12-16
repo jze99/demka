@@ -1,1 +1,4 @@
 flet
+flet.core
+requests
+flet-web

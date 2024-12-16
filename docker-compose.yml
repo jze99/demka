@@ -11,7 +11,7 @@ services:
       - api
     build:
       context: .
-      dockerfile: C:\Users\Administrator\Desktop\demka\app\dockerfile
+      dockerfile: ./app/dockerfile
 
   api:
     image: demka:api
@@ -25,7 +25,7 @@ services:
       - postgres
     build:
       context: .
-      dockerfile: C:\Users\Administrator\Desktop\demka\api\dockerfile
+      dockerfile: ./api/dockerfile
   
 
 
@@ -41,8 +41,11 @@ services:
       - POSTGRES_PASSWORD=postgres
       - PGDATA = /var/lib/postgresql/data/pgdata
     volumes:
-      - C:\Users\Administrator\Documents\demka-data-base:/var/lib/postgresql/data
+      - ./deta_base_hesh/:/var/lib/postgresql/data
 
 networks:
   demka:
     driver: bridge
+
+#docker compose -f "docker-compose.yml" down
+#docker compose -f "docker-compose.yml" up -d --build

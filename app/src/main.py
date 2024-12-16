@@ -1,8 +1,9 @@
 import flet as ft
 from views import ViewHandler
 
+
 def main(page: ft.Page):
-    
+
     def PageLoader(route):
         page.views.clear()
         page.views.append(ViewHandler(page=page)[page.route])
