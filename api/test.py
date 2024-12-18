@@ -1,94 +1,36 @@
-import pytest
-from fastapi.testclient import TestClient
-from main import app  # Импортируйте ваше приложение FastAPI
+import unittest
 
-client = TestClient(app)
+class TestExample(unittest.TestCase):
 
-@pytest.fixture
-def setup_database():
-    # Здесь вы можете подготовить вашу базу данных
-    # Например, создать тестовые данные или очистить базу перед тестами
-    yield
-    # Здесь вы можете очистить базу данных после тестов, если это необходимо
+    def test_success_1(self):
+        self.assertEqual(1 + 1, 2)
 
-def test_start(setup_database):
-    response = client.post("/api-demka/start")
-    assert response.status_code == 200
-    assert response.json() == {"log": "базы созданы"}
+    def test_success_2(self):
+        self.assertTrue(True)
 
-def test_add_customer(setup_database):
-    customer_data = {
-        "id": 1,
-        "name": "John Doe",
-        "contact_info": "john@example.com",
-        "address": "123 Main St"
-    }
-    response = client.post("/api-demka/add", json=customer_data)
-    assert response.status_code == 200
-    assert response.json() == {"message": "Запись добавлена"}
+    def test_success_3(self):
+        self.assertIn(3, [1, 2, 3])
 
-def test_add_customer_missing_fields(setup_database):
-    customer_data = {
-        "name": "John Doe",
-        "contact_info": "john@example.com"
-        # Missing address
-    }
-    response = client.post("/api-demka/add", json=customer_data)
-    assert response.status_code == 422  # Expecting a 422 error
+    def test_success_4(self):
+        self.assertIsNone(None)
 
-def test_update_customer(setup_database):
-    customer_data = {
-        "id": 1,
-        "name": "John Doe Updated",
-        "contact_info": "john_updated@example.com",
-        "address": "456 Main St"
-    }
-    response = client.post("/api-demka/update", json=customer_data)
-    assert response.status_code == 200
-    assert response.json() == {"message": "Запись обновлена"}
+    def test_success_5(self):
+        self.assertGreater(5, 3)
 
-def test_delete_customer(setup_database):
-    # Ensure a customer exists first
-    client.post("/api-demka/add", json={
-        "id": 1,
-        "name": "John Doe",
-        "contact_info": "john@example.com",
-        "address": "123 Main St"
-    })
-    
-    customer_data = [
-        {"id": 1}
-    ]
-    response = client.post("/api-demka/delete", json=customer_data)
-    assert response.status_code == 200
-    assert response.json() == {"message": "Запись удалена"}  # Adjust according to your API response
+    def test_failure_1(self):
+        self.assertEqual(1 + 1, 3)  # Ошибка
 
-def test_add_order(setup_database):
-    order_data = {
-        "id": 1,
-        "order_data": "2024-12-13",
-        "customer": "John Doe",
-        "total_amount": 100.0
-    }
-    response = client.post("/api-demka/add1", json=order_data)
-    assert response.status_code == 200
-    assert "message" not in response.json()  # Убедитесь, что нет сообщения об ошибке
+    def test_failure_2(self):
+        self.assertTrue(False)  # Ошибка
 
-def test_update_order(setup_database):
-    order_data = {
-        "id": 1,
-        "order_data": "2024-12-14",
-        "customer": "John Doe Updated",
-        "total_amount": 150.0
-    }
-    response = client.post("/api-demka/update1", json=order_data)
-    assert response.status_code == 200
-    assert "message" not in response.json()  # Убедитесь, что нет сообщения об ошибке
+    def test_failure_3(self):
+        self.assertIn(4, [1, 2, 3])  # Ошибка
 
-def test_delete_order(setup_database):
-    order_data = [
-        {"id": 1}
-    ]
-    response = client.post("/api-demka/delete1", json=order_data)
-    assert response.status_code == 200
-    assert "message" not in response.json()  # Убедитесь, что нет сообщения об ошибке
+    def test_failure_4(self):
+        self.assertIsNone(1)  # Ошибка
+
+    def test_failure_5(self):
+        self.assertGreater(3, 5)  # Ошибка
+
+if __name__ == "__main__":
+    unittest.main()

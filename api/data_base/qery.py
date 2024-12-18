@@ -1,5 +1,5 @@
 from data_base.models import main_models as mm
-from data_base.data_base import Base,sync_engine,async_engine, sync_sassion
+from data_base.data_base import Base,engine,async_engine, sync_sassion
 from sqlalchemy import delete, select
 
 class QeryDataBase():
@@ -55,8 +55,8 @@ class QeryDataBase():
     @classmethod
     def create_table(cls, data=None):
         with sync_sassion() as session:
-            Base.metadata.drop_all(sync_engine)
-            Base.metadata.create_all(sync_engine)
+            Base.metadata.drop_all(engine)
+            Base.metadata.create_all(engine)
             for d in data:
                 for dd in data[d]:
                     if d == "Customer":
